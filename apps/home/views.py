@@ -48,3 +48,8 @@ def pages(request):
 @login_required(login_url="/login/")
 def dashboard(request):
     return render(request, 'home/dashboard.html')
+
+
+@login_required(login_url="/login/")
+def settings(request):
+    return render(request, 'home/settings.html')
