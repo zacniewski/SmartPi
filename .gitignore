@@ -23,6 +23,7 @@ my_env
 
 # javascript
 package-lock.json
+secrets.json
 
 staticfiles/*
 !staticfiles/.gitkeep 
