@@ -135,3 +135,8 @@ def get_secret(setting, secrets=secrets):
         return secrets[setting]
     except KeyError:
         raise ImproperlyConfigured(f"Set the {setting} setting!")
+
+
+# WEATHER
+WEATHER_API_KEY = get_secret("WEATHER_API_KEY")
+DEFAULT_LOCATION = get_secret("default_location")
