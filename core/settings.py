@@ -2,9 +2,10 @@
 """
 Copyright (c) 2019 - present AppSeed.us
 """
-
+import json
 import os
 from decouple import config
+from django.core.exceptions import ImproperlyConfigured
 from unipath import Path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -123,4 +124,14 @@ STATICFILES_DIRS = (
 
 
 #############################################################
-#############################################################
+# Secrets
+with open(os.path.join(CORE_DIR, 'secrets.json')) as secrets_file:
+    secrets = json.load(secrets_file)
+
+
+def get_secret(setting, secrets=secrets):
+    """Get secret setting or fail with ImproperlyConfigured"""
+    try:
+        return secrets[setting]
+    except KeyError:
+        raise ImproperlyConfigured(f"Set the {setting} setting!")
