@@ -5,5 +5,5 @@ app_name = 'weather'
 
 urlpatterns = [
     path('default-location/', views.weather_in_default_location, name='default_weather'),
-    path('<str:query>/', views.current_weather, name='current_weather'),
+    path('current-weather/', views.current_weather, name='current_weather'),
 ]
