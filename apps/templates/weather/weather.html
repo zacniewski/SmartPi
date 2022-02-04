@@ -159,18 +159,18 @@
                 <div class="d-flex align-items-center justify-content-between border-bottom pb-3">
                     <div class="d-flex align-items-center pt-3">
                             <div class="icon-shape icon-sm icon-shape-info rounded me-3">
-                                <i class="far fa-flag fa-2x"></i>
+                                <i class="far fa-clock fa-2x"></i>
                             </div>
                             <div class="d-block">
-                                <label class="mb-0">Timezone</label>
+                                <label class="mb-0">Local time</label>
                                 <h4 class="mb-0"></h4>
                             </div>
-                        </div>
-                    <div>
+                   </div>
+                   <div>
                         <span class="d-flex align-items-center fw-bold">
-                            {{ current_weather_data.location.tz_id }}
+                            {{ current_weather_data.location.localtime }}
                         </span>
-                    </div>
+                   </div>
                 </div>
                 <div class="d-flex align-items-center justify-content-between border-bottom py-3">
                     <div class="d-flex align-items-center pt-3">
@@ -184,28 +184,28 @@
                         </div>
                     <div>
                         <span class="d-flex align-items-center fw-bold">
-                            Latitude: {{ current_weather_data.location.lat }}
+                            Latitude: {{ current_weather_data.location.lat }} &deg;
                         </span>
                         <span class="d-flex align-items-center fw-bold">
-                            Longitude: {{ current_weather_data.location.lon }}
+                            Longitude: {{ current_weather_data.location.lon }} &deg;
                         </span>
                     </div>
                 </div>
                 <div class="d-flex align-items-center justify-content-between pt-3">
                    <div class="d-flex align-items-center pt-3">
                             <div class="icon-shape icon-sm icon-shape-info rounded me-3">
-                                <i class="far fa-clock fa-2x"></i>
+                                <i class="fas fa-compress-alt fa-2x"></i>
                             </div>
                             <div class="d-block">
-                                <label class="mb-0">Local time</label>
+                                <label class="mb-0">Pressure</label>
                                 <h4 class="mb-0"></h4>
                             </div>
-                        </div>
+                   </div>
                    <div>
                         <span class="d-flex align-items-center fw-bold">
-                            {{ current_weather_data.location.localtime }}
+                            {{ current_weather_data.current.pressure_mb }} hPa
                         </span>
-                    </div>
+                   </div>
                 </div>
             </div>
         </div>
@@ -219,48 +219,48 @@
                 <div class="d-flex align-items-center justify-content-between border-bottom pb-3">
                     <div class="d-flex align-items-center pt-3">
                             <div class="icon-shape icon-sm icon-shape-info rounded me-3">
-                                <i class="far fa-clock fa-2x"></i>
+                                <i class="fas fa-temperature-low fa-2x"></i>
                             </div>
                             <div class="d-block">
-                                <label class="mb-0">Local time</label>
+                                <label class="mb-0">Temperature</label>
                                 <h4 class="mb-0"></h4>
                             </div>
                         </div>
                    <div>
                         <span class="d-flex align-items-center fw-bold">
-                            {{ current_weather_data.location.localtime }}
+                            {{ current_weather_data.current.temp_c }} ℃
                         </span>
                     </div>
                 </div>
                 <div class="d-flex align-items-center justify-content-between border-bottom py-3">
                     <div class="d-flex align-items-center pt-3">
                             <div class="icon-shape icon-sm icon-shape-info rounded me-3">
-                                <i class="far fa-clock fa-2x"></i>
+                                <i class="fas fa-wind fa-2x"></i>
                             </div>
                             <div class="d-block">
-                                <label class="mb-0">Local time</label>
+                                <label class="mb-0">Wind speed</label>
                                 <h4 class="mb-0"></h4>
                             </div>
                         </div>
                    <div>
                         <span class="d-flex align-items-center fw-bold">
-                            {{ current_weather_data.location.localtime }}
+                            {{ current_weather_data.current.wind_kph }} km/h
                         </span>
                     </div>
                 </div>
                 <div class="d-flex align-items-center justify-content-between pt-3">
                     <div class="d-flex align-items-center pt-3">
                             <div class="icon-shape icon-sm icon-shape-info rounded me-3">
-                                <i class="far fa-clock fa-2x"></i>
+                                <i class="fas fa-cloud-sun fa-2x"></i>
                             </div>
                             <div class="d-block">
-                                <label class="mb-0">Local time</label>
+                                <label class="mb-0">Wind direction</label>
                                 <h4 class="mb-0"></h4>
                             </div>
                         </div>
                    <div>
                         <span class="d-flex align-items-center fw-bold">
-                            {{ current_weather_data.location.localtime }}
+                            {{ current_weather_data.current.wind_dir }}
                         </span>
                     </div>
                 </div>
@@ -270,54 +270,54 @@
         <div class="col-12 col-xxl-4 mb-4">
             <div class="card border-0 shadow">
             <div class="card-header border-bottom d-flex align-items-center justify-content-between">
-                <h2 class="fs-5 fw-bold mb-0">Default location: {{ default_location }}</h2>
+                <h2 class="fs-5 fw-bold mb-0">Timezone: {{ current_weather_data.location.tz_id }}</h2>
             </div>
             <div class="card-body">
                 <div class="d-flex align-items-center justify-content-between border-bottom pb-3">
                     <div class="d-flex align-items-center pt-3">
                             <div class="icon-shape icon-sm icon-shape-info rounded me-3">
-                                <i class="far fa-clock fa-2x"></i>
+                                <i class="fas fa-cloud-sun-rain fa-2x"></i>
                             </div>
                             <div class="d-block">
-                                <label class="mb-0">Local time</label>
+                                <label class="mb-0">Condition</label>
                                 <h4 class="mb-0"></h4>
                             </div>
                         </div>
                    <div>
                         <span class="d-flex align-items-center fw-bold">
-                            {{ current_weather_data.location.localtime }}
+                            {{ current_weather_data.current.condition.text }}
                         </span>
                     </div>
                 </div>
                 <div class="d-flex align-items-center justify-content-between border-bottom py-3">
                     <div class="d-flex align-items-center pt-3">
                             <div class="icon-shape icon-sm icon-shape-info rounded me-3">
-                                <i class="far fa-clock fa-2x"></i>
+                                <i class="fas fa-cloud fa-2x"></i>
                             </div>
                             <div class="d-block">
-                                <label class="mb-0">Local time</label>
+                                <label class="mb-0">Cloudiness</label>
                                 <h4 class="mb-0"></h4>
                             </div>
                         </div>
                    <div>
                         <span class="d-flex align-items-center fw-bold">
-                            {{ current_weather_data.location.localtime }}
+                            {{ current_weather_data.current.cloud }}%
                         </span>
                     </div>
                 </div>
                 <div class="d-flex align-items-center justify-content-between pt-3">
                     <div class="d-flex align-items-center pt-3">
                             <div class="icon-shape icon-sm icon-shape-info rounded me-3">
-                                <i class="far fa-clock fa-2x"></i>
+                                <i class="fas fa-umbrella fa-2x"></i>
                             </div>
                             <div class="d-block">
-                                <label class="mb-0">Local time</label>
+                                <label class="mb-0">Humidity</label>
                                 <h4 class="mb-0"></h4>
                             </div>
                         </div>
                    <div>
                         <span class="d-flex align-items-center fw-bold">
-                            {{ current_weather_data.location.localtime }}
+                            {{ current_weather_data.current.humidity }}%
                         </span>
                     </div>
                 </div>
