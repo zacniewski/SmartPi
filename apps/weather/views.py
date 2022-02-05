@@ -8,13 +8,17 @@ wak = settings.WEATHER_API_KEY
 
 def weather_in_default_location(request):
     default_location = settings.DEFAULT_LOCATION
-    current_weather_api_url = "https://api.weatherapi.com/v1/current.json"
-    current_weather_api_url += "?key=" + wak + "&q=" + default_location + "&aqi=no"
-    response = requests.get(current_weather_api_url)
-    print(response.json())
+    current_weather_api_url = f"https://api.weatherapi.com/v1/current.json"
+    current_weather_api_url += f"?key={wak}&q={default_location}&aqi=no"
+    forecast_weather_api_url = f"https://api.weatherapi.com/v1/forecast.json"
+    forecast_weather_api_url += f"?key={wak}&q={default_location}&aqi=no"
+    response_current = requests.get(current_weather_api_url)
+    response_forecast = requests.get(forecast_weather_api_url)
+    print(response_current.json())
     return render(request, 'weather/default-weather.html',
-                  {'default_weather_data': response.json(),
-                   'default_location': default_location})
+                  {'default_weather_data': response_current.json(),
+                   'default_location': default_location,
+                   'forecast_default_weather': response_forecast.json()})
 
 
 def current_weather(request):
