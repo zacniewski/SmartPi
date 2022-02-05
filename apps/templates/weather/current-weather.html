@@ -1,10 +1,231 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "layouts/base.html" %}
 
-</body>
-</html>
+{% block title %} Weather {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-12 col-xl-12">
+            <div class="card card-body border-0 shadow mb-4">
+                <h2 class="h5 mb-4">Weather information</h2>
+                <form action="{%  url 'weather:current_weather' %}">
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <div>
+                                <label for="weather_query">City | Latitude and Longitude | IP address</label>
+                                <input class="form-control" id="query" name="weather_query" type="text" placeholder="Gdynia ... or 48.8567,2.3508 ... or 85.237.165.165 ..." required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <button class="btn btn-gray-800 mt-2 animate-up-2" type="submit">Search </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% if not current_weather_data.error %}
+        <div class="row">
+            <div class="col-12 col-xxl-4 mb-4">
+                <div class="card border-0 shadow">
+                    <div class="card-header border-bottom d-flex align-items-center justify-content-between">
+                    <h2 class="fs-5 fw-bold mb-0">Current location: {{ query }}</h2>
+                </div>
+                    <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between border-bottom pb-3">
+                        <div class="d-flex align-items-center pt-3">
+                                <div class="icon-shape icon-sm icon-shape-info rounded me-3">
+                                    <i class="far fa-clock fa-2x"></i>
+                                </div>
+                                <div class="d-block">
+                                    <label class="mb-0">Local time</label>
+                                    <h4 class="mb-0"></h4>
+                                </div>
+                       </div>
+                       <div>
+                            <span class="d-flex align-items-center fw-bold">
+                                {{ current_weather_data.location.localtime }}
+                            </span>
+                       </div>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between border-bottom py-3">
+                        <div class="d-flex align-items-center pt-3">
+                                <div class="icon-shape icon-sm icon-shape-info rounded me-3">
+                                    <i class="far fa-compass fa-2x"></i>
+                                </div>
+                                <div class="d-block">
+                                    <label class="mb-0">Coordinates</label>
+                                    <h5 class="mb-0"></h5>
+                                </div>
+                            </div>
+                        <div>
+                            <span class="d-flex align-items-center fw-bold">
+                                Latitude: {{ current_weather_data.location.lat }}&deg;
+                            </span>
+                            <span class="d-flex align-items-center fw-bold">
+                                Longitude: {{ current_weather_data.location.lon }}&deg;
+                            </span>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between pt-3">
+                       <div class="d-flex align-items-center pt-3">
+                                <div class="icon-shape icon-sm icon-shape-info rounded me-3">
+                                    <i class="fas fa-compress-alt fa-2x"></i>
+                                </div>
+                                <div class="d-block">
+                                    <label class="mb-0">Pressure</label>
+                                    <h4 class="mb-0"></h4>
+                                </div>
+                       </div>
+                       <div>
+                            <span class="d-flex align-items-center fw-bold">
+                                {{ current_weather_data.current.pressure_mb }} hPa
+                            </span>
+                       </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-12 col-xxl-4 mb-4">
+                <div class="card border-0 shadow">
+                <div class="card-header border-bottom d-flex align-items-center justify-content-between">
+                    <h2 class="fs-5 fw-bold mb-0">Country: {{ current_weather_data.location.country }}</h2>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between border-bottom pb-3">
+                        <div class="d-flex align-items-center pt-3">
+                                <div class="icon-shape icon-sm icon-shape-info rounded me-3">
+                                    <i class="fas fa-temperature-low fa-2x"></i>
+                                </div>
+                                <div class="d-block">
+                                    <label class="mb-0">Temperature</label>
+                                    <h4 class="mb-0"></h4>
+                                </div>
+                            </div>
+                       <div>
+                            <span class="d-flex align-items-center fw-bold">
+                                {{ current_weather_data.current.temp_c }} ℃
+                            </span>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between border-bottom py-3">
+                        <div class="d-flex align-items-center pt-3">
+                                <div class="icon-shape icon-sm icon-shape-info rounded me-3">
+                                    <i class="fas fa-wind fa-2x"></i>
+                                </div>
+                                <div class="d-block">
+                                    <label class="mb-0">Wind speed</label>
+                                    <h4 class="mb-0"></h4>
+                                </div>
+                            </div>
+                       <div>
+                            <span class="d-flex align-items-center fw-bold">
+                                {{ current_weather_data.current.wind_kph }} km/h
+                            </span>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between pt-3">
+                        <div class="d-flex align-items-center pt-3">
+                                <div class="icon-shape icon-sm icon-shape-info rounded me-3">
+                                    <i class="fas fa-cloud-sun fa-2x"></i>
+                                </div>
+                                <div class="d-block">
+                                    <label class="mb-0">Wind direction</label>
+                                    <h4 class="mb-0"></h4>
+                                </div>
+                            </div>
+                       <div>
+                            <span class="d-flex align-items-center fw-bold">
+                                {{ current_weather_data.current.wind_dir }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="col-12 col-xxl-4 mb-4">
+                <div class="card border-0 shadow">
+                <div class="card-header border-bottom d-flex align-items-center justify-content-between">
+                    <h2 class="fs-5 fw-bold mb-0">Timezone: {{ current_weather_data.location.tz_id }}</h2>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between border-bottom pb-3">
+                        <div class="d-flex align-items-center pt-3">
+                                <div class="icon-shape icon-sm icon-shape-info rounded me-3">
+                                    <i class="fas fa-cloud-sun-rain fa-2x"></i>
+                                </div>
+                                <div class="d-block">
+                                    <label class="mb-0">Condition</label>
+                                    <h4 class="mb-0"></h4>
+                                </div>
+                            </div>
+                       <div>
+                            <span class="d-flex align-items-center fw-bold">
+                                {{ current_weather_data.current.condition.text }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between border-bottom py-3">
+                        <div class="d-flex align-items-center pt-3">
+                                <div class="icon-shape icon-sm icon-shape-info rounded me-3">
+                                    <i class="fas fa-cloud fa-2x"></i>
+                                </div>
+                                <div class="d-block">
+                                    <label class="mb-0">Cloudiness</label>
+                                    <h4 class="mb-0"></h4>
+                                </div>
+                            </div>
+                       <div>
+                            <span class="d-flex align-items-center fw-bold">
+                                {{ current_weather_data.current.cloud }}%
+                            </span>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between pt-3">
+                        <div class="d-flex align-items-center pt-3">
+                                <div class="icon-shape icon-sm icon-shape-info rounded me-3">
+                                    <i class="fas fa-umbrella fa-2x"></i>
+                                </div>
+                                <div class="d-block">
+                                    <label class="mb-0">Humidity</label>
+                                    <h4 class="mb-0"></h4>
+                                </div>
+                            </div>
+                       <div>
+                            <span class="d-flex align-items-center fw-bold">
+                                {{ current_weather_data.current.humidity }}%
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+    {% else %}
+        <div class="row">
+           <div class="col-12 col-xxl-12 mb-4">
+                <div class="card border-0 shadow">
+                    <div class="card-header border-bottom d-flex flex-column align-items-center justify-content-center">
+                        <h2 class="fw-bold mb-4 mt-6">Error: {{ current_weather_data.error.message }}</h2>
+                        <span style='font-size:3rem;'>&#9940;</span>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center border-bottom pb-3">
+                        <div class="d-flex align-items-center pt-3">
+                            <h3>Try again with different place!</h3>
+
+                       </div>
+                    </div>
+                </div>
+           </div>
+        </div>
+    {% endif %}
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+{% endblock javascripts %}

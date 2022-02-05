@@ -13,7 +13,7 @@ def weather_in_default_location(request):
     response = requests.get(current_weather_api_url)
     print(response.json())
     return render(request, 'weather/default-weather.html',
-                  {'current_weather_data': response.json(),
+                  {'default_weather_data': response.json(),
                    'default_location': default_location})
 
 
@@ -23,4 +23,6 @@ def current_weather(request):
     current_weather_api_url += "?key=" + wak + "&q=" + query + "&aqi=no"
     response = requests.get(current_weather_api_url)
     print(response.json())
-    return render(request, 'weather/current-weather.html', {})
+    return render(request, 'weather/current-weather.html',
+                  {'current_weather_data': response.json(),
+                   'query': query})
