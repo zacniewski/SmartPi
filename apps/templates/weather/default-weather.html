@@ -394,7 +394,7 @@
                   <thead class="thead-light">
                       <tr>
                           <th class="border-0 rounded-start">Hour</th>
-                          <th class="border-0">Temp. [&deg;C]</th>
+                          <th class="border-0">Temperature</th>
                           <th class="border-0">Overcast</th>
                           <th class="border-0">Wind</th>
                           <th class="border-0">Pressure</th>
@@ -408,7 +408,7 @@
                       <tr>
                           <td class="text-primary fw-bold">{{ forloop.counter0 }}</td>
                           <td class="fw-bold d-flex align-items-center">
-                              {{ item.temp_c }}
+                              {{ item.temp_c }} &deg;C
                           </td>
                           <td>
                               <div class="row d-flex align-items-center">
@@ -423,7 +423,7 @@
                               </div>
                           </td>
                           <td>
-                              {{ item.wind_kph }} km/h, <u>{{ item.wind_dir }}</u>
+                              {{ item.wind_kph }} km/h &#11013; {{ item.wind_dir }}
                           </td>
                           <td>
                             {{ item.pressure_mb }} hPa
