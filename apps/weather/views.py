@@ -14,7 +14,6 @@ def weather_in_default_location(request):
     forecast_weather_api_url += f"?key={wak}&q={default_location}&aqi=no"
     response_current = requests.get(current_weather_api_url)
     response_forecast = requests.get(forecast_weather_api_url)
-    print(response_current.json())
     return render(request, 'weather/default-weather.html',
                   {'default_weather_data': response_current.json(),
                    'default_location': default_location,
@@ -29,7 +28,6 @@ def current_weather(request):
     forecast_weather_api_url += f"?key={wak}&q={query}&aqi=no"
     response_current = requests.get(current_weather_api_url)
     response_forecast = requests.get(forecast_weather_api_url)
-    print(response_current.json())
     return render(request, 'weather/current-weather.html',
                   {'current_weather_data': response_current.json(),
                    'forecast_current_weather': response_forecast.json(),
