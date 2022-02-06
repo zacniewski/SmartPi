@@ -205,6 +205,259 @@
             </div>
         </div>
 
+        <!-- Forecast - next day statistics -->
+        <div class="row">
+        <div class="col-12 col-xxl-4 mb-4">
+            <div class="card border-0 shadow">
+            <div class="card-header border-bottom d-flex align-items-center justify-content-between">
+                <h2 class="fs-5 fw-bold mb-0">Forecast for <u>{{ forecast_current_weather.forecast.forecastday.0.date }}</u></h2>
+            </div>
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between border-bottom pb-3">
+                    <div class="d-flex align-items-center pt-3">
+                            <div class="icon-shape icon-sm icon-shape-success rounded me-3">
+                                <i class="fas fa-temperature-low fa-2x"></i>
+                            </div>
+                            <div class="d-block">
+                                <label class="mb-0">Average temperature</label>
+                                <h4 class="mb-0"></h4>
+                            </div>
+                   </div>
+                   <div>
+                        <span class="d-flex align-items-center fw-bold">
+                            {{ forecast_current_weather.forecast.forecastday.0.day.avgtemp_c }} &deg;C
+                        </span>
+                   </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-between border-bottom py-3">
+                    <div class="d-flex align-items-center pt-3">
+                            <div class="icon-shape icon-sm icon-shape-success rounded me-3">
+                                <i class="fas fa-cloud-rain fa-2x"></i>
+                            </div>
+                            <div class="d-block">
+                                <label class="mb-0">Chance of rain</label>
+                                <h5 class="mb-0"></h5>
+                            </div>
+                        </div>
+                    <div>
+                        <span class="d-flex align-items-center fw-bold">
+                            {{ forecast_current_weather.forecast.forecastday.0.day.daily_chance_of_rain }}%
+                        </span>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-between pt-3">
+                   <div class="d-flex align-items-center pt-3">
+                            <div class="icon-shape icon-sm icon-shape-success rounded me-3">
+                                <i class="fas fa-snowflake fa-2x"></i>
+                            </div>
+                            <div class="d-block">
+                                <label class="mb-0">Chance of snow</label>
+                                <h4 class="mb-0"></h4>
+                            </div>
+                   </div>
+                   <div>
+                        <span class="d-flex align-items-center fw-bold">
+                            {{ forecast_current_weather.forecast.forecastday.0.day.daily_chance_of_snow }}%
+                        </span>
+                   </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="col-12 col-xxl-4 mb-4">
+            <div class="card border-0 shadow">
+            <div class="card-header border-bottom d-flex align-items-center justify-content-between">
+                <h2 class="fs-5 fw-bold mb-0">Sun from <u>{{ forecast_current_weather.forecast.forecastday.0.astro.sunrise }}</u>
+                    to <u>{{ forecast_current_weather.forecast.forecastday.0.astro.sunset }}</u>
+                </h2>
+            </div>
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between border-bottom pb-3">
+                    <div class="d-flex align-items-center pt-3">
+                            <div class="icon-shape icon-sm icon-shape-success rounded me-3">
+                                <i class="fas fa-umbrella fa-2x"></i>
+                            </div>
+                            <div class="d-block">
+                                <label class="mb-0">Average humidity</label>
+                                <h4 class="mb-0"></h4>
+                            </div>
+                        </div>
+                   <div>
+                        <span class="d-flex align-items-center fw-bold">
+                            {{ forecast_current_weather.forecast.forecastday.0.day.avghumidity }}%
+                        </span>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-between border-bottom py-3">
+                    <div class="d-flex align-items-center pt-3">
+                            <div class="icon-shape icon-sm icon-shape-success rounded me-3">
+                                <i class="fas fa-wind fa-2x"></i>
+                            </div>
+                            <div class="d-block">
+                                <label class="mb-0">Max. wind speed</label>
+                                <h4 class="mb-0"></h4>
+                            </div>
+                        </div>
+                   <div>
+                        <span class="d-flex align-items-center fw-bold">
+                            {{ forecast_current_weather.forecast.forecastday.0.day.maxwind_kph }} km/h
+                        </span>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-between pt-3">
+                    <div class="d-flex align-items-center pt-3">
+                            <div class="icon-shape icon-sm icon-shape-success rounded me-3">
+                                <i class="fas fa-cloud-showers-heavy fa-2x"></i>
+                            </div>
+                            <div class="d-block">
+                                <label class="mb-0">Total precipitation</label>
+                                <h4 class="mb-0"></h4>
+                            </div>
+                        </div>
+                   <div>
+                        <span class="d-flex align-items-center fw-bold">
+                            {{ forecast_current_weather.forecast.forecastday.0.day.totalprecip_mm }} mm
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="col-12 col-xxl-4 mb-4">
+            <div class="card border-0 shadow">
+            <div class="card-header border-bottom d-flex align-items-center justify-content-between">
+                <h2 class="fs-5 fw-bold mb-0">Moon from <u>{{ forecast_current_weather.forecast.forecastday.0.astro.moonrise }}</u>
+                    to <u>{{ forecast_current_weather.forecast.forecastday.0.astro.moonset }}</u>
+                </h2>
+            </div>
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between border-bottom pb-3">
+                    <div class="d-flex align-items-center pt-3">
+                            <div class="icon-shape icon-sm icon-shape-success rounded me-3">
+                                <i class="fas fa-cloud-sun-rain fa-2x"></i>
+                            </div>
+                            <div class="d-block">
+                                <label class="mb-0">Condition</label>
+                                <h4 class="mb-0"></h4>
+                            </div>
+                        </div>
+                   <div>
+                        <span class="d-flex align-items-center fw-bold">
+                            {{ forecast_current_weather.forecast.forecastday.0.day.condition.text }}
+                        </span>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-between border-bottom py-3">
+                    <div class="d-flex align-items-center pt-3">
+                            <div class="icon-shape icon-sm icon-shape-success rounded me-3">
+                                <i class="fas fa-sun fa-2x"></i>
+                            </div>
+                            <div class="d-block">
+                                <label class="mb-0">UV index</label>
+                                <h4 class="mb-0"></h4>
+                            </div>
+                        </div>
+                   <div>
+                        <span class="d-flex align-items-center fw-bold">
+                            {{ forecast_current_weather.forecast.forecastday.0.day.uv }}
+                        </span>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-between pt-3">
+                    <div class="d-flex align-items-center pt-3">
+                            <div class="icon-shape icon-sm icon-shape-success rounded me-3">
+                                <i class="fas fa-eye fa-2x"></i>
+                            </div>
+                            <div class="d-block">
+                                <label class="mb-0">Average visibility</label>
+                                <h4 class="mb-0"></h4>
+                            </div>
+                        </div>
+                   <div>
+                        <span class="d-flex align-items-center fw-bold">
+                            {{ forecast_current_weather.forecast.forecastday.0.day.avgvis_km }} km
+                        </span>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- Forecast - next day hour by hour -->
+        <div class="card border-0 shadow mb-4">
+      <div class="card-body">
+          <h4>Weather for tomorrow</h4>
+          <div class="table-responsive">
+              <table class="table table-centered table-nowrap mb-0 rounded">
+                  <thead class="thead-light">
+                      <tr>
+                          <th class="border-0 rounded-start">Hour</th>
+                          <th class="border-0">Temperature</th>
+                          <th class="border-0">Overcast</th>
+                          <th class="border-0">Wind</th>
+                          <th class="border-0">Pressure</th>
+                          <th class="border-0">Humidity</th>
+                          <th class="border-0 rounded-end">Precipitation</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {% for item in forecast_current_weather.forecast.forecastday.0.hour %}
+                      <!-- Item -->
+                      <tr>
+                          <td class="text-primary fw-bold">{{ forloop.counter0 }}</td>
+                          <td class="fw-bold d-flex align-items-center">
+                              {{ item.temp_c }} &deg;C
+                          </td>
+                          <td>
+                              <div class="row d-flex align-items-center">
+                                  <div class="col-12 col-xl-2 px-0">
+                                      <div class="small fw-bold">{{ item.cloud }}%</div>
+                                  </div>
+                                  <div class="col-12 col-xl-10 px-0 px-xl-1">
+                                      <div class="progress progress-lg mb-0">
+                                          <div class="progress-bar bg-info" role="progressbar" aria-valuenow="{{ item.cloud }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ item.cloud }}%;"></div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </td>
+                          <td>
+                              {{ item.wind_kph }} km/h &#11013; {{ item.wind_dir }}
+                          </td>
+                          <td>
+                            {{ item.pressure_mb }} hPa
+                          <td>
+                              <div class="row d-flex align-items-center">
+                                  <div class="col-12 col-xl-2 px-0">
+                                      <div class="small fw-bold">{{ item.humidity }}%</div>
+                                  </div>
+                                  <div class="col-12 col-xl-10 px-0 px-xl-1">
+                                      <div class="progress progress-lg mb-0">
+                                          <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{ item.humidity }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ item.humidity }}%;"></div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </td>
+                          <td>
+                              <div class="d-flex align-items-center">
+                                  {% if item.precip_mm > 0 %}
+                                      <svg class="icon icon-xs me-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd"></path></svg>
+                                      <span class="fw-bold text-success">{{ item.precip_mm }} mm</span>
+                                  {% else %}
+                                      <span class="fw-bold text-dark">{{ item.precip_mm }} mm</span>
+                                  {%  endif %}
+
+                              </div>
+                          </td>
+                      </tr>
+                      <!-- End of Item -->
+                      {%  endfor %}
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+
     {% else %}
         <div class="row">
            <div class="col-12 col-xxl-12 mb-4">
