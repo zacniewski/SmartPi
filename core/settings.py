@@ -129,10 +129,10 @@ with open(os.path.join(CORE_DIR, 'secrets.json')) as secrets_file:
     secrets = json.load(secrets_file)
 
 
-def get_secret(setting, secrets=secrets):
+def get_secret(setting, my_secrets=secrets):
     """Get secret setting or fail with ImproperlyConfigured"""
     try:
-        return secrets[setting]
+        return my_secrets[setting]
     except KeyError:
         raise ImproperlyConfigured(f"Set the {setting} setting!")
 
