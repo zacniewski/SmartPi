@@ -8,6 +8,7 @@ urlpatterns = [
     path('', views.dashboard, name='home'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('settings/', views.settings, name='settings'),
+    path('update-settings/', views.update_settings, name='update_settings'),
 
     # Matches any html file
     re_path(r'^.*\.*', views.pages, name='pages'),

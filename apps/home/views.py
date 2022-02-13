@@ -3,7 +3,7 @@
 import json
 import os
 from django import template
-from django.conf import settings
+from django.conf import settings as conf_settings
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -53,13 +53,25 @@ def dashboard(request):
 
 @login_required(login_url="/login/")
 def settings(request):
+    form = SettingsForm()
+    return render(request, 'home/settings.html', {'form': form})
+
+
+@login_required(login_url="/login/")
+def update_settings(request):
     if request.method == 'GET':
-        location = request.GET.get('location')
-        print(f"New location is {location}")
-        with open(os.path.join(settings.CORE_DIR, 'secrets.json'), 'r+') as secrets_file:
-            file_data = json.load(secrets_file)
-            file_data["default_location"] = location
-            secrets_file.seek(0)
-            # convert back to json.
-            json.dump(file_data, secrets_file, indent=4)
-    return render(request, 'home/settings.html')
+        form = SettingsForm(request.GET)
+        if form.is_valid():
+            print(request.GET.get("location", "Gowino"))
+            with open(os.path.join(conf_settings.CORE_DIR, 'secrets.json'), 'r+') as secrets_file:
+                file_data = json.load(secrets_file)
+                file_data["default_location"] = "Gowino"
+                secrets_file.seek(0)
+                # convert back to json.
+                json.dump(file_data, secrets_file, indent=4)
+        else:
+            print(form.errors)
+    else:
+        form = SettingsForm()
+
+    return render(request, 'home/settings.html', {'form': form})

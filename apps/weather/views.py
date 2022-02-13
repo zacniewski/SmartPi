@@ -1,13 +1,13 @@
 import requests
 
-from django.conf import settings
+from django.conf import settings as conf_settings
 from django.shortcuts import render
 
-wak = settings.WEATHER_API_KEY
+wak = conf_settings.WEATHER_API_KEY
 
 
 def weather_in_default_location(request):
-    default_location = settings.DEFAULT_LOCATION
+    default_location = conf_settings.DEFAULT_LOCATION
     current_weather_api_url = f"https://api.weatherapi.com/v1/current.json"
     current_weather_api_url += f"?key={wak}&q={default_location}&aqi=no"
     forecast_weather_api_url = f"https://api.weatherapi.com/v1/forecast.json"
