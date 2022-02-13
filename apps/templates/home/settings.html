@@ -10,30 +10,28 @@
     <div class="row">
         <div class="col-12 col-xl-12">
             <div class="card card-body border-0 shadow mb-4 mb-xl-0">
-                <h2 class="h5 mb-4">Allow for settings change?</h2>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item d-flex align-items-center justify-content-between px-0 border-bottom">
+                    <li class="list-group-item d-flex align-items-center justify-content-between px-0 border-info">
                         <div>
-                            <p class="small pe-4">Unlock and update your settings!</p>
+                            <h4 class="pe-4">Unlock and update your settings
+                                <span><i class="fas fa-long-arrow-alt-right"></i></span>
+                            </h4>
                         </div>
-                        <div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input"
-                                       type="checkbox"
-                                       id="user-notification-1"
-                                       onchange="toggle()"
-                                >
-                                <label class="form-check-label" for="user-notification-1"></label>
-                            </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input"
+                                   type="checkbox"
+                                   id="user-notification-1"
+                                   onchange="toggle()"
+                            >
+                            <label class="form-check-label" for="user-notification-1">OFF</label>
                         </div>
                     </li>
                 </ul>
             </div>
 
             <div class="card card-body border-0 shadow mt-4 mb-4">
-                <h2 class="h5 mb-4">General information</h2>
-                <form>
-                    <div class="row">
+                <form method="GET">
+                    <!--<div class="row">
                         <div class="col-md-6 mb-3">
                             <div>
                                 <label for="first_name">First Name</label>
@@ -79,28 +77,30 @@
                                 <input class="form-control" id="phone" type="number" placeholder="+12-345 678 910" required>
                             </div>
                         </div>
-                    </div>
-                    <h2 class="h5 my-4">Default location</h2>
+                    </div>-->
+                    <h2 class="h5 my-4">Default settings</h2>
                     <div class="row">
                         <div class="col-sm-9 mb-3">
                             <div class="form-group">
-                                <label for="address">Address</label>
+                                <label for="address">Location</label>
                                 <div class="input-group">
-                                    <input class="form-control" id="address" type="password" placeholder="Enter your home address" disabled>
+                                    <br>
+                                    <input class="form-control" id="id_location" type="text" placeholder="Enter your place of interest" disabled>
                                     <span class="input-group-text">
                                         <i class="fas fa-map-marker-alt"></i>
                                     </span>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-3 mb-3">
+                        <!--<div class="col-sm-3 mb-3">
                             <div class="form-group">
                                 <label for="number">Number</label>
                                 <input class="form-control" id="number" type="number" placeholder="No." required>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
+                    </div>-->
+
+                        <!--<div class="row">
                         <div class="col-sm-4 mb-3">
                             <div class="form-group">
                                 <label for="city">City</label>
@@ -170,15 +170,17 @@
                                 <input class="form-control" id="zip" type="tel" placeholder="ZIP" required>
                             </div>
                         </div>
-                    </div>
-                    <div class="mt-3">
+                    </div>-->
+                        <div class="mt-3">
                         <button
                                 class="btn btn-gray-800 mt-2 animate-up-2"
                                 type="submit"
+                                id="save_all"
                                 onclick="save_all()"
                         >
                             Save all
                         </button>
+                    </div>
                     </div>
                 </form>
             </div>
@@ -191,25 +193,32 @@
 {% block javascripts %}
     <script>
         function toggle() {
-            let location = document.getElementById('address');
+            let location = document.getElementById('id_location');
             let check_location_attr = location.hasAttribute('disabled');
-            console.log('check_location_attr =', check_location_attr);
+            let on_off = document.getElementsByClassName('form-check-label')[0];
+            let save_button = document.getElementById('save_all');
+
             if (!check_location_attr) {
                 location.setAttribute('disabled', 'True');
+                on_off.innerHTML = 'OFF'
+                save_button.setAttribute('disabled', 'True');
             }
             else {
                 location.removeAttribute('disabled');
+                on_off.innerHTML = 'ON'
+                save_button.removeAttribute('disabled');
             }
 
         }
 
         function save_all() {
-            let location = document.getElementById('address');
-            let switcher  =document.getElementById('user-notification-1');
+            let location = document.getElementById('id_location');
+            let switcher = document.getElementById('user-notification-1');
             location.setAttribute('disabled', 'True');
             if (switcher.hasAttribute('checked')) {
                 switcher.removeAttribute('checked');
             }
+            save_button.setAttribute('disabled', 'True');
         }
     </script>
 {% endblock javascripts %}

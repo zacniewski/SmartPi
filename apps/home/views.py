@@ -1,20 +1,21 @@
 # -*- encoding: utf-8 -*-
-"""
-Copyright (c) 2019 - present AppSeed.us
-"""
 
+import json
+import os
 from django import template
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.template import loader
 from django.urls import reverse
 
+from .forms import SettingsForm
+
 
 @login_required(login_url="/login/")
 def index(request):
     context = {'segment': 'index'}
-
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
 
@@ -40,7 +41,7 @@ def pages(request):
         html_template = loader.get_template('home/page-404.html')
         return HttpResponse(html_template.render(context, request))
 
-    except:
+    except template.TemplateDoesNotExist:
         html_template = loader.get_template('home/page-500.html')
         return HttpResponse(html_template.render(context, request))
 
@@ -52,4 +53,13 @@ def dashboard(request):
 
 @login_required(login_url="/login/")
 def settings(request):
+    if request.method == 'GET':
+        location = request.GET.get('location')
+        print(f"New location is {location}")
+        with open(os.path.join(settings.CORE_DIR, 'secrets.json'), 'r+') as secrets_file:
+            file_data = json.load(secrets_file)
+            file_data["default_location"] = location
+            secrets_file.seek(0)
+            # convert back to json.
+            json.dump(file_data, secrets_file, indent=4)
     return render(request, 'home/settings.html')
