@@ -25,7 +25,7 @@
             </div>-->
 
             <div class="card card-body border-0 shadow mt-4 mb-4">
-                <form action="{% url 'update_settings' %}">
+                <form action="{% url 'update_settings' %}" method="get">
                     <h2 class="h5 my-4">Default settings</h2>
                     <div class="row">
                         <div class="col-sm-9 mb-3">
@@ -34,10 +34,11 @@
                                 <div class="input-group mb-4">
                                     <input class="form-control"
                                     id="id_location"
+                                    name="id_location"
                                     type="text"
-                                    placeholder="Update your place of interest"
                                     value="{{ default_location }}"
-                                    disabled>
+                                    disabled
+                                    >
                                     <span class="input-group-text">
                                         <i class="fas fa-map-marker-alt"></i>
                                     </span>
@@ -45,7 +46,8 @@
                                 <label for="location">Another setting</label>
                                 <div class="input-group">
                                     <input class="form-control"
-                                    id="id_location"
+                                    id="id_another_setting"
+                                    name="id_another_setting"
                                     type="text"
                                     value="{{ another_setting }}"
                                     disabled>
@@ -57,11 +59,19 @@
                         </div>
 
                         <div class="mt-3">
-                            <button class="btn btn-danger mt-2 animate-up-2"
-                                    type="submit">
-                                Unlock and update settings!
+                            <button class="btn btn-warning mt-2 animate-up-2"
+                                    type="button"
+                                    id="unlock_button"
+                                    onclick="disableButton()">
+                                Unlock settings!
                             </button>
-
+                            <button class="btn btn-danger mt-2 animate-up-2"
+                                    type="submit"
+                                    id="update_button"
+                                    disabled
+                            >
+                                Update settings!
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -73,5 +83,24 @@
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
+    <script>
+        let update_button = document.getElementById("update_button");
+        update_button.style.display = "none";
+
+         function disableButton() {
+            let unlock_button = document.getElementById("unlock_button");
+            //let update_button = document.getElementById("update_button");
+            let setting_location = document.getElementById("id_location");
+            let setting_another = document.getElementById("id_another_setting");
+
+            unlock_button.setAttribute("disabled", "True");
+            update_button.removeAttribute("disabled");
+
+            unlock_button.style.display = "none";
+            update_button.style.display = "block";
+            setting_location.removeAttribute("disabled");
+            setting_another.removeAttribute("disabled");
+    }
+    </script>
 
 {% endblock javascripts %}
