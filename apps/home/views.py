@@ -66,9 +66,7 @@ def settings(request):
 @login_required(login_url="/login/")
 def update_settings(request):
     default_location = request.GET.get("id_location")
-    print(f"default_location = {default_location}")
     another_setting = request.GET.get("id_another_setting")
-    print(f"another_setting = {another_setting}")
 
     with open(os.path.join(conf_settings.CORE_DIR, 'secrets.json'), 'r+') as secrets_file:
         file_data = json.load(secrets_file)
