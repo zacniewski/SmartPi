@@ -9,24 +9,9 @@
 
     <div class="row">
         <div class="col-12 col-xl-12">
-            <!--<div class="card card-body border-0 shadow mb-4 mb-xl-0">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item d-flex align-items-center justify-content-between px-0 border-info">
-                        <div>
-                            <h4 class="pe-4">Unlock and update your settings
-                                <span><i class="fas fa-long-arrow-alt-right"></i></span>
-                            </h4>
-                        </div>
-                        <div class="form-check form-switch">
-                            <button class="btn btn-danger" type="button">Unlock settings!</button>
-                        </div>
-                    </li>
-                </ul>
-            </div>-->
-
             <div class="card card-body border-0 shadow mt-4 mb-4">
                 <form action="{% url 'update_settings' %}" method="get">
-                    <h2 class="h5 my-4">Default settings</h2>
+                    <h2 class="h5 my-4">Current settings</h2>
                     <div class="row">
                         <div class="col-sm-9 mb-3">
                             <div class="form-group">
@@ -93,14 +78,31 @@
             let setting_location = document.getElementById("id_location");
             let setting_another = document.getElementById("id_another_setting");
 
-            unlock_button.setAttribute("disabled", "True");
+            //unlock_button.setAttribute("disabled", "True");
             update_button.removeAttribute("disabled");
 
             unlock_button.style.display = "none";
-            update_button.style.display = "block";
+            update_button.style.display = "inline";
             setting_location.removeAttribute("disabled");
             setting_another.removeAttribute("disabled");
-    }
+         }
+
+         const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-primary',
+                    cancelButton: 'btn btn-gray'
+                },
+                buttonsStyling: false
+            });
+
+        document.getElementById('unlock_button').addEventListener('click', function () {
+                swalWithBootstrapButtons.fire(
+                    'Warning alert',
+                    'You can now edit the default settings!',
+                    'warning'
+                )
+            });
+
     </script>
 
 {% endblock javascripts %}

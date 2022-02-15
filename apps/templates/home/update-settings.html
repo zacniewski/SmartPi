@@ -9,24 +9,9 @@
 
     <div class="row">
         <div class="col-12 col-xl-12">
-            <!--<div class="card card-body border-0 shadow mb-4 mb-xl-0">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item d-flex align-items-center justify-content-between px-0 border-info">
-                        <div>
-                            <h4 class="pe-4">Unlock and update your settings
-                                <span><i class="fas fa-long-arrow-alt-right"></i></span>
-                            </h4>
-                        </div>
-                        <div class="form-check form-switch">
-                            <button class="btn btn-danger" type="button">Unlock settings!</button>
-                        </div>
-                    </li>
-                </ul>
-            </div>-->
-
             <div class="card card-body border-0 shadow mt-4 mb-4">
                 <form action="{% url 'update_settings' %}">
-                    <h2 class="h5 my-4">Default settings</h2>
+                    <h2 class="h5 my-4">Updated settings</h2>
                     <div class="row">
                         <div class="col-sm-9 mb-3">
                             <div class="form-group">
@@ -58,14 +43,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="mt-3">
-                            <button class="btn btn-info mt-2 animate-up-2"
-                                    type="submit">
-                                Save your changes!
-                            </button>
-
-                        </div>
                     </div>
                 </form>
             </div>
@@ -76,5 +53,21 @@
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
+    <script>
+         const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-primary',
+                cancelButton: 'btn btn-gray'
+            },
+            buttonsStyling: false
+        });
 
+        swalWithBootstrapButtons.fire({
+                icon: 'success',
+                title: 'Settings updated!',
+                text: 'Your changes has been saved',
+                showConfirmButton: true,
+                timer: 2000
+            });
+    </script>
 {% endblock javascripts %}
