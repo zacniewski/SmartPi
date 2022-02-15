@@ -25,13 +25,13 @@
             </div>-->
 
             <div class="card card-body border-0 shadow mt-4 mb-4">
-                <form method="GET" action="{% url 'update_settings' %}">
+                <form action="{% url 'update_settings' %}">
                     <h2 class="h5 my-4">Default settings</h2>
                     <div class="row">
                         <div class="col-sm-9 mb-3">
                             <div class="form-group">
                                 <label for="location">Location</label>
-                                <div class="input-group">
+                                <div class="input-group mb-4">
                                     <input class="form-control"
                                     id="id_location"
                                     type="text"
@@ -40,6 +40,17 @@
                                     disabled>
                                     <span class="input-group-text">
                                         <i class="fas fa-map-marker-alt"></i>
+                                    </span>
+                                </div>
+                                <label for="location">Another setting</label>
+                                <div class="input-group">
+                                    <input class="form-control"
+                                    id="id_location"
+                                    type="text"
+                                    value="{{ another_setting }}"
+                                    disabled>
+                                    <span class="input-group-text">
+                                        <i class="fas fa-key"></i>
                                     </span>
                                 </div>
                             </div>

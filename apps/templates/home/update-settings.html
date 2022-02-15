@@ -9,7 +9,7 @@
 
     <div class="row">
         <div class="col-12 col-xl-12">
-            <div class="card card-body border-0 shadow mb-4 mb-xl-0">
+            <!--<div class="card card-body border-0 shadow mb-4 mb-xl-0">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item d-flex align-items-center justify-content-between px-0 border-info">
                         <div>
@@ -18,48 +18,50 @@
                             </h4>
                         </div>
                         <div class="form-check form-switch">
-                            <input class="form-check-input"
-                                   type="checkbox"
-                                   id="user-notification-1"
-                                   onchange="toggle()"
-                            >
-                            <label class="form-check-label" for="user-notification-1">OFF</label>
+                            <button class="btn btn-danger" type="button">Unlock settings!</button>
                         </div>
                     </li>
                 </ul>
-            </div>
+            </div>-->
 
             <div class="card card-body border-0 shadow mt-4 mb-4">
-                <form method="GET" action=".">
+                <form action="{% url 'settings' %}">
                     <h2 class="h5 my-4">Default settings</h2>
                     <div class="row">
                         <div class="col-sm-9 mb-3">
                             <div class="form-group">
                                 <label for="location">Location</label>
-                                <div class="input-group">
+                                <div class="input-group mb-4">
                                     <input class="form-control"
                                     id="id_location"
                                     type="text"
                                     placeholder="Update your place of interest"
-                                    value="{{ default_location }}"
-                                    disabled>
+                                    value="bzzz"
+                                    >
                                     <span class="input-group-text">
                                         <i class="fas fa-map-marker-alt"></i>
+                                    </span>
+                                </div>
+                                <label for="location">Another setting</label>
+                                <div class="input-group">
+                                    <input class="form-control"
+                                    id="id_location"
+                                    type="text"
+                                    value="bzzzz2"
+                                    >
+                                    <span class="input-group-text">
+                                        <i class="fas fa-key"></i>
                                     </span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="mt-3">
-                            <button
-                                    class="btn btn-gray-800 mt-2 animate-up-2"
-                                    type="submit"
-                                    id="save_all_button"
-                                    onclick="save_all()"
-                                    disabled
-                            >
-                                Save all
+                            <button class="btn btn-info mt-2 animate-up-2"
+                                    type="submit">
+                                Save your changes!
                             </button>
+
                         </div>
                     </div>
                 </form>
@@ -71,62 +73,5 @@
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
-    <!--
-    <script>
-        function toggle() {
-            let location = document.getElementById('id_location');
-            let check_location_attr = location.hasAttribute('disabled');
-            let on_off = document.getElementsByClassName('form-check-label')[0];
-            let save_button = document.getElementById('save_all_button');
 
-            if (!check_location_attr) {
-                location.setAttribute('disabled', 'True');
-                on_off.innerHTML = 'OFF'
-                save_button.setAttribute('disabled', 'True');
-            }
-            else {
-                location.removeAttribute('disabled');
-                on_off.innerHTML = 'ON'
-                save_button.removeAttribute('disabled');
-            }
-        }
-
-        function save_all() {
-            let location = document.getElementById('id_location');
-            let switcher = document.getElementById('user-notification-1');
-            let save_button = document.getElementById('save_all_button');
-
-            location.setAttribute('disabled', 'True');
-            if (switcher.hasAttribute('checked')) {
-                switcher.removeAttribute('checked');
-            }
-            save_button.setAttribute('disabled', 'True');
-        }
-        */
-        /*document.getElementById('save_all_button').addEventListener('click', function () {
-            const notyf = new Notyf({
-                position: {
-                    x: 'left',
-                    y: 'top',
-                },
-                types: [
-                    {
-                        type: 'info',
-                        background: '#0948B3',
-                        icon: {
-                            className: 'fas fa-info-circle',
-                            tagName: 'span',
-                            color: '#fff'
-                        },
-                        dismissible: false
-                    }
-                ]
-            });
-            notyf.open({
-                type: 'info',
-                message: 'Send us <b>an email</b> to get support'
-            });
-        });
-        */
-    </script>
 {% endblock javascripts %}

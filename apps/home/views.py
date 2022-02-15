@@ -56,20 +56,13 @@ def settings(request):
     with open(os.path.join(conf_settings.CORE_DIR, 'secrets.json'), 'r+') as secrets_file:
         file_data = json.load(secrets_file)
         default_location = file_data["default_location"]
-        print(f"default_location = {default_location}")
+        another_setting = file_data["another_setting"]
+        # another settings will be here!
     return render(request, 'home/settings.html',
-                  {'default_location': default_location})
+                  {"default_location": default_location,
+                   "another_setting": another_setting})
 
 
 @login_required(login_url="/login/")
 def update_settings(request):
-    new_default_location = request.GET.get("id_location")
-    print(f"new_default_location = {new_default_location}")
-    with open(os.path.join(conf_settings.CORE_DIR, 'secrets.json'), 'r+') as secrets_file:
-        file_data = json.load(secrets_file)
-        file_data["default_location"] = new_default_location
-        secrets_file.seek(0)
-        # convert back to json.
-        json.dump(file_data, secrets_file, indent=4)
-    return render(request, 'home/update-settings.html',
-                  {'new_default_location': new_default_location})
+    return render(request, 'home/update-settings.html')
