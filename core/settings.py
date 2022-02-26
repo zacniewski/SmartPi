@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.home.config.MyConfig',  # Enable the inner home (home)
     'apps.weather.apps.WeatherConfig',
+    'apps.youtube.apps.YoutubeConfig',
 ]
 
 MIDDLEWARE = [
