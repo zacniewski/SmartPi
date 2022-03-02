@@ -4,6 +4,6 @@ from . import views
 app_name = 'youtube'
 
 urlpatterns = [
-    # path('default-location/', views.weather_in_default_location, name='default_weather'),
+    path('extracted/', views.extracted, name='extracted'),
     # path('current-weather/', views.current_weather, name='current_weather'),
 ]

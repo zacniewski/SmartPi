@@ -9,7 +9,7 @@ from django.urls import path, include  # add this
 urlpatterns = [
     path('admin/', admin.site.urls),                # Django admin route
     path('weather/', include('apps.weather.urls', namespace='weather')),
-    path('weather/', include('apps.youtube.urls', namespace='youtube')),
+    path('mp3-extractor/', include('apps.youtube.urls', namespace='youtube')),
     path('', include('apps.authentication.urls')),  # Auth routes - login / register
     path('', include('apps.home.urls')),             # UI Kits Html files
 ]

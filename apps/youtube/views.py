@@ -1,3 +1,7 @@
+import subprocess
+
 from django.shortcuts import render
 
-# Create your views here.
+
+def extracted(request):
+    return render(request, 'youtube/yt-extractor.html')
