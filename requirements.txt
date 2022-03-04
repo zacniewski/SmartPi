@@ -1,11 +1,20 @@
+amqp==5.0.9
 asgiref==3.4.1
+billiard==3.6.4.0
 boto3==1.21.7
 botocore==1.24.7
+celery==5.2.3
 certifi==2021.10.8
 charset-normalizer==2.0.12
+click==8.0.4
+click-didyoumean==0.3.0
+click-plugins==1.1.1
+click-repl==0.2.0
 Django==3.2.11
 idna==3.3
 jmespath==0.10.0
+kombu==5.2.3
+prompt-toolkit==3.0.28
 python-dateutil==2.8.2
 python-decouple==3.6
 pytz==2021.3
@@ -15,4 +24,6 @@ six==1.16.0
 sqlparse==0.4.2
 Unipath==1.1
 urllib3==1.26.8
+vine==5.0.0
+wcwidth==0.2.5
 whitenoise==6.0.0
