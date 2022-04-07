@@ -35,3 +35,4 @@ apps/static/assets/.temp
 
 # audio files
 *.mp3
+*.m4a
