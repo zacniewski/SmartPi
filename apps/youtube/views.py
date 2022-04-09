@@ -48,7 +48,7 @@ def download_file(request, path):
         with open(file_path, "rb") as fh:
             mime_type, _ = mimetypes.guess_type(file_path)
             response = HttpResponse(fh.read(), content_type=mime_type)
-            response["Content-Disposition"] = "inline; filename=" + os.path.basename(
+            response["Content-Disposition"] = "attachment; filename=" + os.path.basename(
                 file_path
             )
             return response
