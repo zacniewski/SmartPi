@@ -5,5 +5,5 @@ app_name = 'youtube'
 
 urlpatterns = [
     path('extracted/', views.extracted, name='extracted'),
-    path('test/<str:url>', views.test, name='test'),
+    path('downloading/', views.downloader, name='downloader'),
 ]

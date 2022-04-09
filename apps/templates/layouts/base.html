@@ -79,7 +79,19 @@
 
       {% include 'includes/navigation.html' %}
 
-      {% block content %}{% endblock content %} 
+        {% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                  <strong>{{ message|safe }}</strong>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+            </ul>
+
+        {% endif %}
+
+      {% block content %}{% endblock content %}
 
       <!--{#% include 'includes/settings-box.html' %#}-->
 
@@ -88,9 +100,28 @@
     </main>
 
   {% include 'includes/scripts.html' %}
+
+  <!-- Warnings for duplicated URL from YT-->
+  <script>
+        function downloadingWarning() {
+            const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-primary',
+                cancelButton: 'btn btn-gray'
+            },
+            buttonsStyling: false
+        });
+
+        swalWithBootstrapButtons.fire(
+                'Warning alert',
+                'You clicked the button!',
+                'warning'
+            )
+        }
+    </script>
     
   <!-- Specific Page JS goes HERE  -->
-  {% block javascripts %}{% endblock javascripts %}  
+  {% block javascripts %}{% endblock javascripts %}
       
 </body>
 </html>

@@ -1,0 +1,57 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Extracted songs {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    <main>
+        <div class="col-12 col-xl-12">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h2 class="h5 mb-4">Your file is being downloaded ...</h2>
+                    <i class="fas fa-download fa-6x"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="container py-4">
+            <div class="p-5 mb-4 bg-light rounded-3">
+                <div class="container-fluid py-5">
+                    <h1 class="display-5 fw-bold mb-4">Is it legal?</h1>
+                    <p class="col-md-12 fs-4">
+                        Short answer: Yes. You aren’t allowed to download material that is copyrighted if you do not have express permission.
+                        If the content is not copyright, then you are allowed to download or "rip" both the audio and video from YouTube uploads.
+                        Ripping audio content from videos uploaded on YouTube breaks YouTube’s <a href="https://www.youtube.com/static?template=terms" target="_blank">terms of service</a> (TOS).
+                        There’s a big difference between US copyright laws and YouTube’s TOS.
+                        Violating YouTube’s terms of service is not illegal by law but YouTube could ban your account.
+                    </p>
+                    <p>You will be redirected to the page with your songs in <span id="timer">60 seconds</span> ...</p>
+                    <a class="btn btn-primary btn-lg" href="{%  url 'youtube:extracted' %}" role="button">Go now!</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+    <script>
+    let count = 60
+    let counter = setInterval(timer, 1000)
+
+    function timer(){
+       count = count-1
+       if (count <= 0)
+       {
+           clearInterval(counter);
+           window.location.href = "{% url 'youtube:extracted' %}"
+       }
+       document.getElementById("timer").innerHTML= count + " seconds";
+
+}
+    </script>
+{% endblock javascripts %}

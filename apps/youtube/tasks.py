@@ -39,7 +39,8 @@ ydl_opts = {
 
 @shared_task
 def yt_downloader(url):
+    id_of_song = url.split("?")[1]
+    link_to_audio = 'https://www.youtube.com/watch?' + id_of_song
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-        link_to_audio = 'https://www.youtube.com/watch?' + url
-        print(link_to_audio)
         ydl.download([link_to_audio])
+    return ydl.progress_hooks
