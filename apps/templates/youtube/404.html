@@ -1,0 +1,15 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="row">
+        <div class="jumbotron">
+          <h1 class="display-4">Plik nie został znaleziony!</h1>
+          <p class="lead">Sprawdź, czy pliki znajdują się w odpowiednim folderze.
+              Jeśli tak, to możesz sprawdzić ich nazwy lub skontaktować się z administratorem.</p>
+          <hr class="my-4">
+          <p>Kliknij, aby wrócić do listy plików!</p>
+          <a class="btn btn-primary btn-lg" href="{% url 'youtube:extracted' %}" role="button">Powrót do listy plików</a>
+        </div>
+    </div>
+{% endblock content %}
