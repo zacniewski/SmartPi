@@ -4,6 +4,7 @@ import os
 
 from django.conf import settings as project_settings
 from django.contrib import messages
+from django.core.paginator import EmptyPage, Paginator, PageNotAnInteger
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
@@ -18,6 +19,15 @@ def extracted(request):
     for full_path in glob.iglob(dir_path + '/' + '*.mp3'):
         print(f"{full_path=}")
         song_list.append([full_path, os.path.basename(full_path)])
+
+    paginator = Paginator(song_list, 5)
+    page = request.GET.get("page")
+    try:
+        songs = paginator.page(page)
+    except PageNotAnInteger:
+        songs = paginator.page(1)
+    except EmptyPage:
+        songs = paginator.page(paginator.num_pages)
 
     if request.method == "POST":
         form = SongForm(request.POST)
@@ -35,7 +45,9 @@ def extracted(request):
         form = SongForm()
     return render(request, 'youtube/extracted-songs.html',
                   {'form': form,
-                   'song_list': song_list})
+                   'song_list': song_list,
+                   'page': page,
+                   'songs': songs})
 
 
 def downloader(request):
