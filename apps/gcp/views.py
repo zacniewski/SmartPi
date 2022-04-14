@@ -8,12 +8,13 @@ def text_to_speech(request):
     client = texttospeech.TextToSpeechClient()
 
     # Set the text input to be synthesized
-    synthesis_input = texttospeech.SynthesisInput(text="Thanks, later bitches!")
+    text = request.GET.get("results", "Witaj Arturze!")
+    synthesis_input = texttospeech.SynthesisInput(text=text)
 
     # Build the voice request, select the language code ("en-US") and the ssml
     # voice gender ("neutral")
     voice = texttospeech.VoiceSelectionParams(
-        language_code="en-US", ssml_gender=texttospeech.SsmlVoiceGender.NEUTRAL
+        language_code="pl-PL", ssml_gender=texttospeech.SsmlVoiceGender.MALE
     )
 
     # Select the type of audio file you want returned
