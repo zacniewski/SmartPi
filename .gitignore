@@ -20,6 +20,7 @@ my_env
 .DS_Store
 .env
 .idea/
+pelagic-bus-347018-ff9090f1014b.json
 
 # javascript
 package-lock.json
