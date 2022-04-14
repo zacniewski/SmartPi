@@ -8,7 +8,7 @@ def text_to_speech(request):
     client = texttospeech.TextToSpeechClient()
 
     # Set the text input to be synthesized
-    synthesis_input = texttospeech.SynthesisInput(text="Hello, World!")
+    synthesis_input = texttospeech.SynthesisInput(text="Thanks, later bitches!")
 
     # Build the voice request, select the language code ("en-US") and the ssml
     # voice gender ("neutral")
