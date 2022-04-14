@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'apps.home.config.MyConfig',  # Enable the inner home (home)
     'apps.weather.apps.WeatherConfig',
     'apps.youtube.apps.YoutubeConfig',
+    'apps.gcp.apps.GcpConfig',
 ]
 
 MIDDLEWARE = [
@@ -143,3 +144,6 @@ def get_secret(setting, my_secrets=secrets):
 # WEATHER
 WEATHER_API_KEY = get_secret("WEATHER_API_KEY")
 DEFAULT_LOCATION = get_secret("default_location")
+
+# Google TextToSpeech
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = os.path.join(MEDIA_ROOT, 'pelagic-bus-347018-ff9090f1014b.json')
