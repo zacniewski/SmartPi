@@ -16,7 +16,7 @@ from .tasks import yt_downloader
 def extracted(request):
     song_list = []
     dir_path = project_settings.MEDIA_ROOT
-    for full_path in glob.iglob(dir_path + '/' + '*.mp3'):
+    for full_path in glob.iglob(dir_path + '/youtube/' + '*.mp3'):
         print(f"{full_path=}")
         song_list.append([full_path, os.path.basename(full_path)])
 
@@ -55,7 +55,9 @@ def downloader(request):
 
 
 def download_file(request, path):
-    file_path = os.path.join(project_settings.MEDIA_ROOT, path)
+    folder_path = project_settings.MEDIA_ROOT + '/youtube'
+    print(f"{folder_path=}")
+    file_path = os.path.join(folder_path, path)
     if os.path.exists(file_path):
         with open(file_path, "rb") as fh:
             mime_type, _ = mimetypes.guess_type(file_path)

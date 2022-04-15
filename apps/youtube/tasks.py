@@ -33,7 +33,7 @@ ydl_opts = {
         }],
         'logger': MyLogger(),
         'progress_hooks': [my_hook],
-        'outtmpl': media_folder + '/%(title)s.%(ext)s',
+        'outtmpl': media_folder + '/youtube' + '/%(title)s.%(ext)s',
     }
 
 

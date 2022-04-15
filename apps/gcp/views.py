@@ -32,8 +32,8 @@ def text_to_speech(request):
 
     # The response's audio_content is binary.
     file_path = project_settings.MEDIA_ROOT
-    with open(file_path + "/" + name_of_speech_file + ".mp3", "wb") as out_file:
+    with open(file_path + "/tts/" + name_of_speech_file + ".mp3", "wb") as out_file:
         # Write the response to the output file.
         out_file.write(response.audio_content)
-        print('Audio content written to file "output.mp3"')
+        print(f"Audio content written to file {name_of_speech_file}.mp3")
     return render(request, 'gcp/text-to-speech.html')
