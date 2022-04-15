@@ -15,6 +15,7 @@ colorama==0.4.4
 Django==3.2.11
 google-api-core==2.7.2
 google-auth==2.6.4
+google-cloud-speech==2.13.1
 google-cloud-texttospeech==2.11.0
 googleapis-common-protos==1.56.0
 grpcio==1.44.0
