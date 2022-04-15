@@ -8,8 +8,10 @@ def text_to_speech(request):
     client = texttospeech.TextToSpeechClient()
 
     # Set the text input to be synthesized
-    text = request.GET.get("results", "Witaj Arturze!")
-    synthesis_input = texttospeech.SynthesisInput(text=text)
+    text_to_convert = request.GET.get("text_to_speech", "Witaj Arturze!")
+    name_of_speech_file = request.GET.get("name_of_speech_file", "Witaj Arturze!")
+
+    synthesis_input = texttospeech.SynthesisInput(text=text_to_convert)
 
     # Build the voice request, select the language code ("en-US") and the ssml
     # voice gender ("neutral")
@@ -30,8 +32,8 @@ def text_to_speech(request):
 
     # The response's audio_content is binary.
     file_path = project_settings.MEDIA_ROOT
-    with open(file_path + "/" + "output.mp3", "wb") as out:
+    with open(file_path + "/" + name_of_speech_file + ".mp3", "wb") as out_file:
         # Write the response to the output file.
-        out.write(response.audio_content)
+        out_file.write(response.audio_content)
         print('Audio content written to file "output.mp3"')
     return render(request, 'gcp/text-to-speech.html')
