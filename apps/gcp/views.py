@@ -1,4 +1,5 @@
 import io
+import glob
 import mimetypes
 import os
 
@@ -59,8 +60,10 @@ def speech_to_text(request, local_file_name):
     # The language of the supplied audio
     language_code = "pl-PL"
 
+    """
+
     # Sample rate in Hertz of the audio data sent
-    sample_rate_hertz = 24000  # było 16000
+    sample_rate_hertz = 24000  # default is 16000
 
     # Encoding of audio data sent. This sample sets this explicitly.
     # This field is optional for FLAC and WAV audio formats.
@@ -70,8 +73,34 @@ def speech_to_text(request, local_file_name):
         language_code=language_code,
     )
 
-    local_full_path = project_settings.MEDIA_ROOT + '/stt/' + local_file_name
-    local_file_name = local_file_name[:-4]
+
+    """
+    local_file_path = local_file_name + '.mp3'
+    local_full_path = project_settings.MEDIA_ROOT + '/stt/' + local_file_path
+    # local_file_name = local_file_name[:-4]
+
+    # The name of the audio file to transcribe
+    # gcs_uri = local_full_path
+    # audio = speech.RecognitionAudio(uri=gcs_uri)
+
+    with io.open(local_full_path, "rb") as f:
+        content = f.read()
+    audio = {"content": content}
+
+    config = speech.RecognitionConfig(
+        encoding=speech.RecognitionConfig.AudioEncoding.LINEAR16,
+        sample_rate_hertz=16000,
+        language_code="pl-PL",
+    )
+
+    # Detects speech in the audio file
+    response = client.recognize(config=config, audio=audio)
+
+    for result in response.results:
+        print("Transcript: {}".format(result.alternatives[0].transcript))
+
+    """
+    
     with io.open(local_full_path, "rb") as f:
         content = f.read()
     audio = {"content": content}
@@ -82,18 +111,33 @@ def speech_to_text(request, local_file_name):
         alternative = result.alternatives[0]
         print(u"Transcript: {}".format(alternative.transcript))
         print(u"Confidence: {}".format(alternative.confidence))
+    """
 
     return render(
         request,
-        "gcp/speech-to-text.html",
-        {"text": alternative.transcript,
-         'confidence': alternative.confidence,
-         'local_file_name': local_file_name},
+        "gcp/speech-to-text.html", {
+            'local_file_name': local_file_name,
+            'local_file_path': local_file_path
+
+        }
     )
+        #{"text": alternative.transcript,
+        # 'confidence': alternative.confidence,
+         #'local_file_name': local_file_name},
+    #)
 
 
-def output_file(request, text):
-    file_path = os.path.join(project_settings.MEDIA_ROOT) + "/stt/" + text + ".mp3"
+def voice_files(request):
+    voice_files_list = []
+    dir_path = project_settings.MEDIA_ROOT
+    for full_path in glob.iglob(dir_path + '/stt/' + '*.mp3'):
+        voice_files_list.append([os.path.basename(full_path), os.path.basename(full_path)[:-4]])
+    return render(request, "gcp/voice-files.html", {'voice_files_list': voice_files_list})
+
+
+def output_file(request, name):
+    file_path = os.path.join(project_settings.MEDIA_ROOT) + "/stt/" + name + ".mp3"
+    print(f"{file_path=}")
     if os.path.exists(file_path):
         with open(file_path, "rb") as fh:
             mime_type, _ = mimetypes.guess_type(file_path)
