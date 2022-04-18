@@ -1,33 +1,61 @@
 {% extends "layouts/base.html" %}
 
-{% block title %} Weather {% endblock %}
+{% load proper_paginate %}
+{% load url_replace %}
+
+{% block title %} Voice files and recordings {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
 
-    <div class="row">
-        <div class="col-12 col-xl-12">
-            {% for vf in voice_files_list %}
-                <table class="table table-bordered border table-striped">
-                  <tbody>
-                    <tr class="bg-warning">
-                        <td>Odtwórz plik <b>{{ vf.0 }}</b>:
-                          <audio controls autoplay>
-                            <source id="wav"
-                                    src="{% url 'gcp:output_file' vf.1 %}"
-                                    type="audio/mpeg"
-                                    onloadeddata="">
-                                Your browser does not support the audio element.
-                          </audio></td>
-                      <td><a href="{% url 'gcp:speech_to_text' vf.1 %}"><i class="fas fa-share fa-2x float-right"></i></a></td>
-                    </tr>
-                  </tbody>
-                </table>
-                <hr>
-            {% endfor %}
-        </div>
+    <div class="card card-body border-0 shadow table-wrapper table-responsive">
+        <h2 class="h5 mb-4">Voice files and recordings</h2>
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                  <th class="border-gray-200">#</th>
+                  <th class="border-gray-200">Title</th>
+                  <th class="border-gray-200">Preview</th>
+                  <th class="border-gray-200">Action</th>
+              </tr>
+          </thead>
+            <tbody>
+            {%  for vf in voice_files_list %}
+              <!-- Item -->
+              <tr>
+                  <td>
+                      <a href="#" class="fw-bold">
+                          {{ forloop.counter }}
+                      </a>
+                  </td>
+                  <td>
+                      <span class="fw-normal">{{ vf.0 }}</span>
+                  </td>
+                  <td><span class="fw-normal">
+                      <audio controls>
+                          <source
+                                  src="{% url 'gcp:output_file' vf.1 %}"
+                                  type="audio/mpeg">
+                          Your browser does not support the audio element.
+                      </audio>
+                  </span>
+                  </td>
+                  <td>
+                      <a
+                              class="btn btn-info"
+                              href="{%  url 'gcp:speech_to_text' vf.1 %}" role="button"
+                      >
+                          Speech To Text
+                      </a>
+                  </td>
+              </tr>
+        {%  endfor %}
+
+      </tbody>
+        </table>
     </div>
+
 
 {%  endblock content %}

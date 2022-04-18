@@ -6,7 +6,7 @@ import os
 from django.conf import settings as project_settings
 from django.http import HttpResponse
 from django.shortcuts import render
-from google.cloud import speech, texttospeech
+from google.cloud import speech_v1p1beta1, texttospeech
 
 
 def text_to_speech(request):
@@ -50,81 +50,45 @@ def speech_to_text(request, local_file_name):
     """
     Transcribe a short audio file using synchronous speech recognition
     Args:
-      local_file_path Path to local audio file, e.g. /path/audio.wav
+      local_file_name Name of local audio file, without extension, e.g. audio
     """
 
-    client = speech.SpeechClient()
-
-    # local_file_path = 'resources/brooklyn_bridge.raw'
+    client = speech_v1p1beta1.SpeechClient()
 
     # The language of the supplied audio
     language_code = "pl-PL"
-
-    """
-
-    # Sample rate in Hertz of the audio data sent
-    sample_rate_hertz = 24000  # default is 16000
-
-    # Encoding of audio data sent. This sample sets this explicitly.
-    # This field is optional for FLAC and WAV audio formats.
-    config = speech.RecognitionConfig(
-        encoding=speech.RecognitionConfig.AudioEncoding.LINEAR16,
-        sample_rate_hertz=sample_rate_hertz,
-        language_code=language_code,
-    )
-
-
-    """
     local_file_path = local_file_name + '.mp3'
     local_full_path = project_settings.MEDIA_ROOT + '/stt/' + local_file_path
-    # local_file_name = local_file_name[:-4]
-
-    # The name of the audio file to transcribe
-    # gcs_uri = local_full_path
-    # audio = speech.RecognitionAudio(uri=gcs_uri)
 
     with io.open(local_full_path, "rb") as f:
         content = f.read()
     audio = {"content": content}
 
-    config = speech.RecognitionConfig(
-        encoding=speech.RecognitionConfig.AudioEncoding.LINEAR16,
+    config = speech_v1p1beta1.RecognitionConfig(
+        encoding=speech_v1p1beta1.RecognitionConfig.AudioEncoding.MP3,
         sample_rate_hertz=16000,
-        language_code="pl-PL",
+        language_code=language_code,
     )
 
     # Detects speech in the audio file
     response = client.recognize(config=config, audio=audio)
+    print(f"{response=}")
 
-    for result in response.results:
-        print("Transcript: {}".format(result.alternatives[0].transcript))
-
-    """
-    
-    with io.open(local_full_path, "rb") as f:
-        content = f.read()
-    audio = {"content": content}
-
-    response = client.recognize(config, audio)
     for result in response.results:
         # First alternative is the most probable result
         alternative = result.alternatives[0]
-        print(u"Transcript: {}".format(alternative.transcript))
-        print(u"Confidence: {}".format(alternative.confidence))
-    """
+        print(f"Transcript: {alternative.transcript}")
+        print(f"Confidence: {alternative.confidence}")
 
     return render(
         request,
         "gcp/speech-to-text.html", {
             'local_file_name': local_file_name,
-            'local_file_path': local_file_path
-
+            'local_file_path': local_file_path,
+            'transcript': alternative.transcript,
+            'confidence': alternative.confidence
         }
     )
-        #{"text": alternative.transcript,
-        # 'confidence': alternative.confidence,
-         #'local_file_name': local_file_name},
-    #)
 
 
 def voice_files(request):
@@ -137,7 +101,6 @@ def voice_files(request):
 
 def output_file(request, name):
     file_path = os.path.join(project_settings.MEDIA_ROOT) + "/stt/" + name + ".mp3"
-    print(f"{file_path=}")
     if os.path.exists(file_path):
         with open(file_path, "rb") as fh:
             mime_type, _ = mimetypes.guess_type(file_path)
@@ -146,6 +109,5 @@ def output_file(request, name):
                 file_path
             )
             return response
-        raise Http404("Nie ma takiego pliku!")
     else:
         return render(request, "gcp/404.html")
