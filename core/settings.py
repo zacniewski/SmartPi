@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'apps.weather.apps.WeatherConfig',
     'apps.youtube.apps.YoutubeConfig',
     'apps.gcp.apps.GcpConfig',
+    'apps.aws.apps.AwsConfig',
 ]
 
 MIDDLEWARE = [
