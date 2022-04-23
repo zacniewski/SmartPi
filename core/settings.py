@@ -148,3 +148,7 @@ DEFAULT_LOCATION = get_secret("default_location")
 
 # Google TextToSpeech
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = os.path.join(MEDIA_ROOT, 'pelagic-bus-347018-ff9090f1014b.json')
+
+# AWS
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
