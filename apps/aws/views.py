@@ -6,7 +6,7 @@ from django.shortcuts import render
 def text_detection(request):
     client = boto3.client('rekognition')
     bucket = 'photo-bucket-artur'
-    photo = 'photo'
+    photo = 'documentation.jpeg'
 
     response = client.detect_text(Image={'S3Object': {'Bucket': bucket, 'Name': photo}})
 
@@ -20,5 +20,5 @@ def text_detection(request):
             print('Parent Id: {}'.format(text['ParentId']))
         print('Type:' + text['Type'])
 
-    print("Text detected: " + str(len(text_detections)))
-    return render(request, 'aws/detect-text.html')
+    print("Total texts detected: " + str(len(text_detections)))
+    return render(request, 'aws/text-detection.html')
