@@ -1,3 +1,5 @@
+## SmartPi  
+![Landing page](https://github.com/zacniewski/SmartPi/blob/master/apps/static/assets/img/SmartPi.png)
 ## How to use it
 
 ```bash
