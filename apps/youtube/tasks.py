@@ -43,4 +43,4 @@ def yt_downloader(url):
     link_to_audio = 'https://www.youtube.com/watch?' + id_of_song
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         ydl.download([link_to_audio])
-    return ydl.progress_hooks
+    return ydl.__str__()
